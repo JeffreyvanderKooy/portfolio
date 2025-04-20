@@ -1566,3 +1566,7 @@ input:checked + .emoji-label {
   image-orientation: from-image; /* Honors EXIF if present */
   transform: rotate(0deg); /* Force upright if EXIF is ignored */
 }
+
+.test {
+  background-color: #ffeb3b;
+}
