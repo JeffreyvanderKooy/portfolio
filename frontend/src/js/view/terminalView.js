@@ -20,13 +20,16 @@ class terminalView {
     $('body').on('click', '.terminal-prompt', () => $('#realInput').focus());
 
     // Fakes the terminal prompt being "selected" on focus of the real input field
-    $('#realInput').on(
+    $(document).on(
       'focus',
+      '#realInput',
       e => this._prompt.addClass('focus') && e.preventDefault()
     );
-    $('#realInput').on('blur', e => this._prompt.removeClass('focus'));
-    $('#realInput').on('keydown', this._registerSubmit.bind(this));
-    $('#realInput').on('input', this._registerInput.bind(this));
+    $(document).on('blur', '#realInput', e =>
+      this._prompt.removeClass('focus')
+    );
+    $(document).on('keydown', '#realInput', this._registerSubmit.bind(this));
+    $(document).on('input', '#realInput', this._registerInput.bind(this));
 
     // Handle internal anchor clicks in terminal
     $('body').on('click', '.terminal a', this._handleAnchorClick.bind(this));
@@ -144,8 +147,6 @@ class terminalView {
    * @returns
    */
   _registerSubmit(e) {
-    if (!this._open) return;
-
     if (e.key.toLowerCase() === 'c' && e.originalEvent.ctrlKey) {
       e.preventDefault();
       return $('.response').html('');
@@ -164,8 +165,6 @@ class terminalView {
   _registerInput(e) {
     e.preventDefault();
 
-    if (!this._open) return;
-
     this._prompt.get(0).innerText = $('#realInput').val();
     this._scrollBottom();
   }
@@ -178,7 +177,6 @@ class terminalView {
     $('.bounce').each((_, ele) => $(ele).removeClass('bounce'));
     $('#toggleTerminalChevron').toggleClass('rotate-180');
     $('#jeffBot-disclaimer').slideToggle();
-    this._open = !this._open;
 
     if (!this._openend) await this._welcomeUser();
   }
