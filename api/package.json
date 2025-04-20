@@ -4,7 +4,7 @@
   "description": "api to serve the frontend of my portfolio application.",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development&& nodemon server.js",
+    "start": "set NODE_ENV=development&& node server.js",
     "start:dev": "set NODE_ENV=development&& nodemon server.js",
     "start:prod": "set NODE_ENV=production&& nodemon server.js",
     "data:import": "node ./dev-data/import-data.js --import",
