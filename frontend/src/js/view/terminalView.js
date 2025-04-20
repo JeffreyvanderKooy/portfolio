@@ -20,9 +20,13 @@ class terminalView {
     $('body').on('click', '.terminal-prompt', () => $('#realInput').focus());
 
     // Fakes the terminal prompt being "selected" on focus of the real input field
-    $('#realInput').on('focus', () => this._prompt.addClass('focus'));
-    $('#realInput').on('blur', () => this._prompt.removeClass('focus'));
-    $('#realInput').on('keyup', this._registerInput.bind(this));
+    $('#realInput').on(
+      'focus',
+      e => this._prompt.addClass('focus') && e.preventDefault()
+    );
+    $('#realInput').on('blur', e => this._prompt.removeClass('focus'));
+    $('#realInput').on('keydown', this._registerSubmit.bind(this));
+    $('#realInput').on('input', this._registerInput.bind(this));
 
     // Handle internal anchor clicks in terminal
     $('body').on('click', '.terminal a', this._handleAnchorClick.bind(this));
@@ -135,20 +139,34 @@ class terminalView {
   }
 
   /**
-   * Captures and processes user keyboard input inside the terminal window.
-   * @param {KeyboardEvent} e - Keydown event
+   *
+   * @param {*} e Keydown event
+   * @returns
    */
-  _registerInput(e) {
+  _registerSubmit(e) {
     if (!this._open) return;
 
-    if (e.key === 'Enter' || e.key === 'Tab') e.preventDefault();
-
-    if (e.key.toLowerCase() === 'c' && e.originalEvent.ctrlKey)
+    if (e.key.toLowerCase() === 'c' && e.originalEvent.ctrlKey) {
+      e.preventDefault();
       return $('.response').html('');
+    }
 
-    if (e.key === 'Enter') return this._sendPrompt(this._prompt.text());
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      return this._sendPrompt(this._prompt.text());
+    }
+  }
 
-    this._prompt.get(0).innerText = e.target.value;
+  /**
+   * Captures and processes user keyboard input inside the terminal window.
+   * @param {KeyboardEvent} e - Input event
+   */
+  _registerInput(e) {
+    e.preventDefault();
+
+    if (!this._open) return;
+
+    this._prompt.get(0).innerText = $('#realInput').val();
     this._scrollBottom();
   }
 

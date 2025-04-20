@@ -70,6 +70,8 @@ class View {
     enable
       ? $('#terminal').append(this._terminalHtml)
       : this._terminalHtml.remove();
+
+    $('#jeffBot-disclaimer').toggle($('#terminalWindow').is(':visible'));
   }
 
   /**
