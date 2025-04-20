@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeffrey's Website</title>
+
+    <!-- bootstrap icons -->
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap-icons/font/bootstrap-icons.css"
+    />
+
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
+    <script
+      type="module"
+      src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+
+    <!-- devIcons -->
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- script -->
+    <script
+      type="module"
+      defer
+      src="./src/js/controller/controller.js"
+    ></script>
+
+    <!-- custom styles -->
+    <link rel="stylesheet" href="./src/css/styles.css" />
+  </head>
+  <body class="" data-bs-theme="dark">
+    <!-- background -->
+    <div
+      class="vw-100 vh-100 position-fixed z-n1 background-dark"
+      id="background"
+    ></div>
+
+    <!-- glassy background cover -->
+    <div class="overlay" style="display: none"></div>
+
+    <!-- Jeffbot lifecycle popup -->
+    <div
+      style="display: none"
+      class="position-fixed top-50 start-50 translate-middle z-2 round-border p-1 select-none"
+      id="jeffBot-lifecycle"
+    >
+      <button class="toggleLifecycle btn btn-danger neo-btn">
+        <i class="bi bi-x"></i>
+      </button>
+      <div
+        style="max-width: 600px; max-height: 600px"
+        class="neobrutal-shadow round-border bg-dark p-3"
+      >
+        <img
+          src="./assets/img/jeffBot.png"
+          alt="Jeffbot lifecycle"
+          class="w-100 h-100 border border-black border-5"
+          style="border-radius: 50%"
+        />
+      </div>
+    </div>
+
+    <!-- feedback form popup -->
+    <div
+      style="display: none"
+      class="position-fixed top-50 start-50 translate-middle z-2 round-border p-5 bg-dark neobrutal-shadow select-none"
+      id="feedbackPopup"
+    >
+      <button
+        class="btn btn-danger neo-btn toggle-feedback"
+        id="toggleFeedback"
+      >
+        <i class="bi bi-x"></i>
+      </button>
+
+      <div>
+        <h3>I Appreciate your feedback!</h3>
+        <hr />
+        <form class="d-flex flex-column gap-1 ps-2 pe-2">
+          <div class="d-flex flex-column">
+            <label for="name" class="form-label">
+              Name
+              <small class="fst-italic">(optional)</small>
+            </label>
+            <input
+              type="text"
+              name="name"
+              class="p-1"
+              placeholder="Anonymous "
+            />
+          </div>
+
+          <hr />
+
+          <div class="select-none">
+            <p class="fst-italic">
+              Your experience
+              <small class="fst-italic">(required)</small>
+            </p>
+            <div class="d-flex justify-content-evenly">
+              <input
+                type="radio"
+                id="bad"
+                class="d-none select-none"
+                name="userExperience"
+                value="bad"
+              />
+              <label class="emoji-label" for="bad">😡</label>
+
+              <input
+                type="radio"
+                id="neutral"
+                class="d-none select-none"
+                name="userExperience"
+                value="neutral"
+                checked
+              />
+              <label class="emoji-label" for="neutral">😐</label>
+
+              <input
+                type="radio"
+                id="good"
+                class="d-none select-none"
+                name="userExperience"
+                value="good"
+              />
+              <label class="emoji-label" for="good">😊</label>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="d-flex flex-column">
+            <label for="feedback" class="fst-italic">
+              Feedback
+              <small class="fst-italic">(optional)</small>
+            </label>
+            <textarea
+              name="feedback"
+              id="feedback"
+              class="p-1"
+              placeholder="Your feedback"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-yellow btn neo-btn mt-2 fw-bold">
+            SEND
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- main content -->
+    <div
+      class="container-lg d-flex flex-column gap-4 p-4 justify-content-center z-0"
+    >
+      <!-- HEADER -->
+      <div class="row d-flex justify-content-center flex select-none">
+        <div
+          class="col-xl-8 bg-dark col-12 rounded-pill p-3 neobrutal-shadow d-flex gap-2 justify-content-between bg-gradient"
+          id="header"
+        >
+          <div>
+            <a
+              role="button"
+              href="https://www.linkedin.com/in/jeffrey-van-der-kooy-9b626b356/"
+              target="_blank"
+              class="btn btn-yellow rounded-pill neo-btn m-2"
+            >
+              <i class="bi bi-linkedin"></i>
+            </a>
+
+            <a
+              role="button"
+              href="https://github.com/JeffreyvanderKooy?tab=repositories"
+              target="_blank"
+              class="btn btn-yellow rounded-pill neo-btn m-2"
+            >
+              <i class="bi bi-github"></i>
+            </a>
+
+            <a
+              role="button"
+              class="btn btn-yellow rounded-pill m-2 neo-btn fw-bold"
+              download="Jeffrey's CV"
+              href="./assets/cv/Jeffrey CV.docx"
+            >
+              DOWNLOAD MY CV
+              <i class="bi bi-download bold"></i>
+            </a>
+          </div>
+          <div>
+            <a
+              id="toggleDarkMode"
+              role="button"
+              class="btn btn-yellow rounded-circle neo-btn m-2"
+            >
+              <!-- <i class="bi bi-sun-fill"></i> -->
+              <i class="bi bi-moon-fill"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- JeffBot -->
+      <div class="row d-flex justify-content-center">
+        <div
+          class="col-xl-8 bg-dark col-12 round-border rounded-pill p-3 text-center neobrutal-shadow bg-gradient d-flex flex-column gap-3"
+          id="terminal"
+        >
+          <button
+            class="btn neo-btn btn-yellow rounded-pill bounce"
+            id="toggleTerminal"
+          >
+            <h5 class="fst-italic m-0 p-2 bounce">
+              Talk to my personal AI assistant JeffBot
+
+              <div class="rotate-small ms-2"><i class="bi bi-robot"></i></div>
+            </h5>
+            <div class="bounce" id="toggleTerminalChevron">
+              <i class="bi bi-chevron-double-down m-0 fw-bold p-2"></i>
+            </div>
+          </button>
+          <div
+            id="terminalWindow"
+            class="p-2 pb-4 position-relative"
+            style="display: none"
+          >
+            <button class="btn btn-yellow neo-btn toggleLifecycle">
+              <i class="bi bi-info-lg"></i>
+            </button>
+            <div
+              class="terminal text-start p-3 h-100 font-monospace fw-light bg-gradient d-flex flex-column gap-3 ps-5"
+            >
+              <div
+                class="overflow-auto overflow-x-hidden p-1 pe-4"
+                id="terminalScroll"
+              >
+                <div class="response d-flex flex-column gap-2"></div>
+
+                <div
+                  class="terminal-prompt fw-light pt-2 mt-3"
+                  data-placeholder="Your question..."
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div
+            id="jeffBot-disclaimer"
+            class="text-center"
+            style="display: none"
+          >
+            <small class="text-warning-emphasis fst-italic">
+              JeffBot is usually spot-on, but for the most accurate details,
+              check my CV!
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="row d-flex justify-content-center">
+        <div
+          class="col-xl-8 bg-dark col-12 round-border p-3 neobrutal-shadow bg-gradient"
+          id="card"
+        >
+          <div class="card mb-3 border-0 bg-dark bg-gradient fw-bold">
+            <div class="row g-0">
+              <div
+                class="col-md-4 d-flex flex-column gap-2 select-none"
+                id="img-container"
+              >
+                <img
+                  class="w-100 shadow-lg round-border border border-black border-3 select-none"
+                  src="./assets/img/avatar.jpg"
+                  alt="avatar image"
+                />
+                <div class="d-flex flex-column">
+                  <small class="fst-italic">
+                    <i class="bi bi-file-image-fill"></i>
+                    - A picture of me with a crocodile
+                  </small>
+                  <small class="fst-italic">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    - Kakadu National Park, Australia
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">WELCOME TO MY WEBSITE!</h5>
+                  <p class="text-body-secondary fst-italic">Who am I?</p>
+                  <p class="card-text">
+                    My name's Jeffrey. Born in the Netherlands, I now live in
+                    Norway. After spending some time in the logistics industry,
+                    I decided it was time for a career change! Coding was an
+                    easy choice for me, as I've always been a problem solver and
+                    a creative thinker.
+                  </p>
+                  <p class="text-body-secondary fst-italic">
+                    What can I offer?
+                  </p>
+                  <p class="card-text">
+                    Being a problem solver, I love taking on new challenges and
+                    broadening my horizons by learning new frameworks and
+                    technologies to get the job done. Working as part of a team
+                    is, of course, important as a programmer—I enjoy helping
+                    coworkers and finding efficient solutions to the task at
+                    hand.
+                  </p>
+                  <p class="text-body-secondary fst-italic">
+                    Where do I want to go?
+                  </p>
+                  <p class="card-text">
+                    My goal is to become a software engineer, with my current
+                    focus on backend development. I'm still finishing up my
+                    education at Noroff and hope to jump right into the field
+                    afterwards! Even though I'm training to be a backend
+                    developer, I also enjoy the design phase of any project and
+                    love the challenge it brings. All my projects are designed
+                    by me—check them out below or ask my assistant, JeffBot, for
+                    help!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS SECTION -->
+
+      <!-- succesfull projects fetched -->
+      <div class="row d-flex justify-content-center d-none">
+        <div
+          class="col-xl-8 bg-dark col-12 round-border p-3 neobrutal-shadow d-flex justify-content-center flex-column align-items-center pt-5 bg-gradient"
+          id="carousel"
+        >
+          <h3>Browse my projects!</h3>
+          <div
+            id="carouselExampleCaptions"
+            class="carousel carousel-dark slide w-100"
+          >
+            <div class="carousel-indicators">
+              <!-- <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button> -->
+            </div>
+            <div class="carousel-inner">
+              <!-- <div class="carousel-item active">
+                <div
+                  class="w-100 p-5 d-flex justify-content-center flex-column align-items-center gap-0 rounded"
+                >
+                  <div class="w-75 iframe-container shadow">
+                    <iframe
+                      class="w-100 scaled-iframe rounded"
+                      src="http://127.0.0.1:5500/frontend/index.html"
+                      frameborder="0"
+                    ></iframe>
+                  </div>
+                  <div
+                    class="w-75 border rounded-bottom shadow text-center p-2 pb-4"
+                  >
+                    <h5 class="">PROJECT TITLE</h5>
+                    <p class="fst-italic">[ NODE, HTML, CSS, JS ]</p>
+                    <p style="height: 100px" class="overflow-auto">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Proin tortor purus platea sit eu id nisi litora
+                      libero. Neque vulputate consequat ac amet augue blandit
+                      maximus aliquet congue. Pharetra vestibulum posuere ornare
+                      faucibus fusce dictumst orci aenean eu facilisis ut
+                      volutpat commodo senectus purus himenaeos fames primis
+                      convallis nisi.
+                    </p>
+                    <div class="d-flex justify-content-evenly">
+                      <button
+                        class="btn btn-yellow rounded-pill shadow"
+                      >
+                        Github Repo
+                        <i class="bi bi-github"></i>
+                      </button>
+                      <button
+                        class="btn btn-yellow rounded-pill shadow"
+                      >
+                        Demo Link
+                        <i class="bi bi-link"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" tabindex="-1">
+                <div
+                  class="w-100 p-5 d-flex justify-content-center flex-column align-items-center gap-0"
+                >
+                  <div class="w-75 iframe-container shadow">
+                    <iframe
+                      class="w-100 scaled-iframe rounded"
+                      src="https://the-usual-suspects.netlify.app/"
+                      frameborder="0"
+                    ></iframe>
+                  </div>
+                  <div
+                    class="w-75 border border-black rounded-bottom shadow text-center p-2 pb-4"
+                  >
+                    <h5 class="">PROJECT TITLE</h5>
+                    <p class="fst-italic">[ NODE, HTML, CSS, JS ]</p>
+                    <p style="height: 100px">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Proin tortor purus platea sit eu id nisi litora
+                      libero. Neque vulputate consequat ac amet augue blandit
+                    </p>
+                    <div class="d-flex justify-content-evenly">
+                      <button class="btn btn-outline-dark rounded-pill shadow">
+                        Github Repo
+                        <i class="bi bi-github"></i>
+                      </button>
+                      <button class="btn btn-outline-dark rounded-pill shadow">
+                        Demo Link
+                        <i class="bi bi-link"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- fetching projects... -->
+      <div class="row d-flex justify-content-center">
+        <div
+          class="col-xl-8 bg-dark col-12 round-border p-3 neobrutal-shadow d-flex justify-content-center flex-column align-items-center pt-5 bg-gradient"
+          id="fetchingProjects"
+        >
+          <div class="text-center">
+            <h3 class="fst-italic mb-2">Fetching projects...</h3>
+            <hr class="error-divider" />
+            <h3 class="fst-italic">— Hang tight</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- footer  -->
+      <div class="row d-flex justify-content-center select-none">
+        <div
+          class="col-xl-8 bg-dark col-12 rounded-pill p-3 neobrutal-shadow d-flex justify-content-evenly"
+          id="footer"
+        >
+          <a
+            role="button"
+            href="mailto:jeffreyvanderkooy@gmail.com"
+            class="btn btn-yellow rounded-pill m-2 neo-btn fw-bold"
+          >
+            CONTACT ME
+            <i class="bi bi-envelope"></i>
+          </a>
+          <div
+            class="d-flex align-items-center fst-italic text-decoration-underline fw-bold"
+            id="credentials"
+          >
+            <p>Made & Designed by me :)</p>
+          </div>
+          <button
+            class="btn btn-yellow rounded-pill m-2 neo-btn fw-bold toggle-feedback"
+          >
+            LEAVE FEEDBACK
+            <i class="bi bi-hand-thumbs-up"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

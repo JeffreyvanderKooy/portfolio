@@ -2,10 +2,25 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "frontend for my portfolio application.",
-  "main": "index.js",
+  "default": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "parcel build index.html",
+    "start": "parcel index.html"
   },
   "author": "Jeffrey van der Kooy",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "core-js": "^3.41.0",
+    "jquery": "^3.7.1",
+    "mapbox-gl": "^3.11.0",
+    "material-dynamic-colors": "^1.1.2",
+    "parcel": "^2.14.1",
+    "terminal.css": "^0.7.5",
+    "uniqid": "^5.4.0"
+  },
+  "devDependencies": {
+    "os-browserify": "^0.3.0"
+  }
 }
