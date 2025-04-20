@@ -1561,3 +1561,8 @@ input:checked + .emoji-label {
   transform: translateX(), translateY(50%);
   font-size: 0.8em;
 }
+
+.avatar {
+  image-orientation: from-image; /* Honors EXIF if present */
+  transform: rotate(0deg); /* Force upright if EXIF is ignored */
+}

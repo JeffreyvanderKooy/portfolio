@@ -4,7 +4,7 @@
   "description": "frontend for my portfolio application.",
   "default": "index.js",
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --no-optimize",
     "start": "parcel index.html"
   },
   "author": "Jeffrey van der Kooy",
@@ -23,11 +23,12 @@
   "devDependencies": {
     "os-browserify": "^0.3.0"
   },
-
   "parcel": {
-  "extends": "@parcel/config-default",
-  "transformers": {
-    "*.{jpg,png,svg}": ["@parcel/transformer-raw"]
+    "extends": "@parcel/config-default",
+    "transformers": {
+      "*.{jpg,png,svg}": [
+        "@parcel/transformer-raw"
+      ]
+    }
   }
-}
 }
