@@ -6,9 +6,7 @@ import Printer from '../utils/terminalMarkup';
  * bot response rendering, animations, and event delegation.
  */
 class terminalView {
-  _open = false; // Tracks if terminal is open
   _openend = false; // Tracks if terminal has been opened at least once
-  _prompt = $('.terminal-prompt'); // DOM element for terminal prompt
   _fetchResponse; // Handler to fetch AI response
   _fetchWelcome; // Handler to fetch welcome message
 
@@ -23,10 +21,10 @@ class terminalView {
     $(document).on(
       'focus',
       '#realInput',
-      e => this._prompt.addClass('focus') && e.preventDefault()
+      e => $('.terminal-prompt').addClass('focus') && e.preventDefault()
     );
     $(document).on('blur', '#realInput', e =>
-      this._prompt.removeClass('focus')
+      $('.terminal-prompt').removeClass('focus')
     );
     $(document).on('keydown', '#realInput', this._registerSubmit.bind(this));
     $(document).on('input', '#realInput', this._registerInput.bind(this));
@@ -70,7 +68,7 @@ class terminalView {
     await Printer[res.topic](res);
 
     // Show prompt again after response
-    this._prompt.toggle();
+    $('.terminal-prompt').toggle();
 
     $('.terminal').trigger('contentChanged');
   }
@@ -79,7 +77,7 @@ class terminalView {
    * Inserts the "thinking" animation into the terminal.
    */
   _insertThinkingAnimation() {
-    this._prompt.text('').toggle();
+    $('.terminal-prompt').text('').toggle();
     $('#realInput').val('');
 
     const markup = `
@@ -103,14 +101,14 @@ class terminalView {
     e.preventDefault();
 
     // If user already submitted or bot is typing, block input
-    if (this._prompt.is(':hidden') || $('.typewriter').length) return;
+    if ($('.terminal-prompt').is(':hidden') || $('.typewriter').length) return;
 
     // Handle links with special data attributes
     if (Object.entries(e.currentTarget.dataset).length)
       return this._delegateAnchorClick(e);
 
     const topic = $(e.target).text();
-    this._prompt.get(0).innerHTML += topic;
+    $('.terminal-prompt').text(topic);
     this._sendPrompt(topic);
   }
 
@@ -154,7 +152,7 @@ class terminalView {
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      return this._sendPrompt(this._prompt.text());
+      return this._sendPrompt($('.terminal-prompt').text());
     }
   }
 
@@ -165,7 +163,7 @@ class terminalView {
   _registerInput(e) {
     e.preventDefault();
 
-    this._prompt.get(0).innerText = $('#realInput').val();
+    $('.terminal-prompt').text($('#realInput').val());
     this._scrollBottom();
   }
 

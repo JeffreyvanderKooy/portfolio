@@ -395,7 +395,9 @@ class Printer {
     return `
       <div class="m-0 mt-3 mb-1 skill w-50 me-1">
         <p class="typewriter m-0"><span class="fw-bold">${skill.name}</span></p>
-        <a data-toggle-description="true" class="typewriter m-0 ms-2" data-typewriter="false"><small>${skill.level}</small> <i class="bi bi-list-nested"></i>
+        <a data-toggle-description="true" class="typewriter m-0 ms-2" data-typewriter="false"><small>${
+          skill.level || 'Tags'
+        }</small> <i class="bi bi-list-nested"></i>
           <span style="display: none">
             <ul class="fw-light m-0">
             ${listItems}
