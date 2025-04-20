@@ -75,24 +75,6 @@
       id="background"
     ></div>
 
-    <!-- fake input for the terminal -->
-    <input
-      id="realInput"
-      type="text"
-      autocomplete="off"
-      autocorrect="off"
-      spellcheck="false"
-      style="
-        position: absolute;
-        opacity: 0;
-        width: 1px;
-        height: 1px;
-        top: 0;
-        left: 0;
-        z-index: -1;
-      "
-    />
-
     <!-- glassy background cover -->
     <div class="overlay" style="display: none"></div>
 
@@ -284,12 +266,30 @@
             class="p-2 pb-4 position-relative"
             style="display: none"
           >
-            <button class="btn btn-yellow neo-btn toggleLifecycle">
+            <button class="btn btn-yellow neo-btn toggleLifecycle z-1">
               <i class="bi bi-info-lg"></i>
             </button>
             <div
-              class="terminal text-start p-3 h-100 font-monospace fw-light bg-gradient d-flex flex-column gap-3 ps-5"
+              class="terminal text-start p-3 h-100 font-monospace fw-light bg-gradient d-flex flex-column gap-3 ps-5 position-relative"
             >
+              <!-- fake input for the terminal -->
+              <input
+                id="realInput"
+                type="text"
+                autocomplete="off"
+                autocorrect="off"
+                spellcheck="false"
+                style="
+                  position: absolute;
+                  opacity: 0;
+                  width: 1px;
+                  height: 1px;
+                  top: 0;
+                  left: 0;
+                  z-index: -1;
+                "
+              />
+
               <div
                 class="overflow-auto overflow-x-hidden p-1 pe-4"
                 id="terminalScroll"
