@@ -40,6 +40,7 @@
 
 .terminal-prompt {
   border-top: rgb(0, 0, 0, 50%) dashed 3px;
+  cursor: text;
 }
 
 .robot-divider {
@@ -516,7 +517,7 @@
     content: '> ';
   }
 
-  .terminal-prompt:not(:empty)::after {
+  .focus::after {
     content: '';
     animation: cursor 800ms infinite;
     background: rgb(0, 0, 0, 70%);
@@ -1387,21 +1388,6 @@
 
 .scroll-wrapper:hover .auto-scroll {
   animation-play-state: paused;
-}
-
-.terminal-prompt:empty::after {
-  content: attr(data-placeholder);
-  border-left: 3.8px rgb(0, 0, 0, 70%) solid;
-  padding-left: 0.5em;
-  height: 1em;
-  left: 0em;
-  color: rgb(0, 0, 0, 70%);
-  pointer-events: none;
-  position: absolute;
-  animation: cursor 1200ms infinite;
-  font-style: italic;
-  bottom: -0px;
-  position: relative;
 }
 
 .experience-logo {

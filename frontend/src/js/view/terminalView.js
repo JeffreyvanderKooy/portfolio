@@ -16,8 +16,13 @@ class terminalView {
     // Toggle terminal window
     $('#toggleTerminal').on('click', this.toggleJeffBot.bind(this));
 
-    // Register keyboard input for prompt
-    $(document).on('keydown', this._registerInput.bind(this));
+    // Allows mobile users to also use the application
+    $('body').on('click', '.terminal-prompt', () => $('#realInput').focus());
+
+    // Fakes the terminal prompt being "selected" on focus of the real input field
+    $('#realInput').on('focus', () => this._prompt.addClass('focus'));
+    $('#realInput').on('blur', () => this._prompt.removeClass('focus'));
+    $('#realInput').on('keyup', this._registerInput.bind(this));
 
     // Handle internal anchor clicks in terminal
     $('body').on('click', '.terminal a', this._handleAnchorClick.bind(this));
@@ -68,6 +73,7 @@ class terminalView {
    */
   _insertThinkingAnimation() {
     this._prompt.text('').toggle();
+    $('#realInput').val('');
 
     const markup = `
     <h5 class="m-0 fw-light text-jeffBot fw-lighter d-flex gap-1" id="thinking">
@@ -135,26 +141,15 @@ class terminalView {
   _registerInput(e) {
     if (!this._open) return;
 
-    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Tab')
-      e.preventDefault();
-
-    if (e.key === 'Backspace')
-      return (this._prompt.get(0).innerText = this._prompt
-        .get(0)
-        .innerText.slice(0, -1));
+    if (e.key === 'Enter' || e.key === 'Tab') e.preventDefault();
 
     if (e.key.toLowerCase() === 'c' && e.originalEvent.ctrlKey)
       return $('.response').html('');
 
     if (e.key === 'Enter') return this._sendPrompt(this._prompt.text());
 
-    if (e.key.length > 1) return;
-
-    this._prompt.get(0).innerText += e.key;
+    this._prompt.get(0).innerText = e.target.value;
     this._scrollBottom();
-
-    // Blurs all buttons to avoid accidental focus styling
-    $('button').each((_, ele) => ele.blur());
   }
 
   /**
