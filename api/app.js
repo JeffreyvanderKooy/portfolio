@@ -21,7 +21,7 @@ const app = express();
 
 // # ________________________________GLOBAL RATE LIMITER & CORS______________________________________ # //
 
-app.set('trust proxy', 2);
+app.set('trust proxy', true);
 
 // INITIALIZE GLOBAL RATE LIMITER
 const limiter = rateLimit({
