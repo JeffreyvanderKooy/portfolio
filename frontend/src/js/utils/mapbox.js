@@ -106,7 +106,7 @@ class Globe {
 
   _globeContainerMarkup() {
     return `
-    <div class='d-flex flex-column mt-2 gap-2' id="map-container">
+    <div class='d-flex flex-column mt-2 gap-2 pe-3 ps-3 pe-3' id="map-container">
       <small class='fw-light fst-italic d-flex align-items-center gap-3'>Visited: <span class='globe-visited-dot' style='background-color: ${GLOBE_VISITED_FILL}'></span></small>
       <div id='map'></div>
     </div>`;

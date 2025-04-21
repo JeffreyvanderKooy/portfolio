@@ -12,7 +12,7 @@ export const RE_ATTEMPT_FETCH_RPOJECTS = 5000;
 
 export const TIMEOUT_FETCH_PROJECTS = 15;
 
-export const TIMEOUT_FETCH_WELCOME = 30;
+export const TIMEOUT_FETCH_WELCOME = 40;
 export const TIMEOUT_FETCH_WELCOME_MSG =
   'Oops, something went wrong! Please try again in a moment. 😊⏳';
 
