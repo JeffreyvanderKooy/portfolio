@@ -10,7 +10,7 @@ export const GLOBE_VISITED_FILL = '#060270';
 
 export const RE_ATTEMPT_FETCH_RPOJECTS = 5000;
 
-export const TIMEOUT_FETCH_PROJECTS = 15;
+export const TIMEOUT_FETCH_PROJECTS = 30;
 
 export const TIMEOUT_FETCH_WELCOME = 40;
 export const TIMEOUT_FETCH_WELCOME_MSG =
