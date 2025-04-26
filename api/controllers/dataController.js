@@ -7,6 +7,7 @@ const Chat = require('../models/chatModel');
 const Feedback = require('../models/feedbackModel');
 const catchAsync = require('../utils/catchAsync');
 const throwErr = require('../utils/appErr');
+const logger = require('../utils/winston');
 
 // # ________________________________HELPER FUNCTIONS______________________________________ # //
 
@@ -34,10 +35,12 @@ const getModel = (topic, next) => {
       break;
   }
 
-  if (!model)
+  if (!model) {
+    logger.info(`No topic could be parsed from topic: ${topic}`);
     return next(
       throwErr(`No data Model could be parsed from topic: ${topic}`, 400)
     );
+  }
 
   return model;
 };
@@ -122,6 +125,8 @@ exports.findChat = catchAsync(async (req, res, next) => {
       userId,
       history: [],
     });
+
+    logger.info(`A new chat was made with id: ${chat.userId}`);
   }
 
   // Create a new history array, leaving out the metadata etc
@@ -161,6 +166,9 @@ exports.storeFeedback = catchAsync(async (req, res, next) => {
     name: name || 'Anonymous', // Set name to 'Anonymous' if no name was entered
     feedback,
   });
+
+  // Log the creation of a new feedback
+  logger.info(`Received new feedback from user: ${chatId}`);
 
   // Response
   res.status(200).json({

@@ -1,5 +1,6 @@
 // # ________________________________IMPORTS______________________________________ # //
 const { generalErrorMessage } = require('../utils/promptBuilder');
+const logger = require('../utils/winston');
 
 /**
  *
@@ -28,7 +29,7 @@ const sendDevErr = (err, res) => {
 const sendDevProd = (err, res) => {
   if (err.isOperational) res.json({ ok: false, message: err.message });
   if (!err.isOperational) {
-    console.log(err);
+    logger.error(err);
 
     res.json({
       ok: false,

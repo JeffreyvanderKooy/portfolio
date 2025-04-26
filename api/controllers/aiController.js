@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const personalInfo = require('../models/personalModel');
 const sanitizeJSON = require('../utils/sanitizeJson.js');
 const dataController = require('../controllers/dataController');
+const logger = require('../utils/winston.js');
 const throwErr = require('../utils/appErr');
 const {
   promptBuilder,
@@ -63,11 +64,11 @@ const tryParseJson = async (json, chat, message, next) => {
     // Parse the JSON into an object and return it if succesfull
     const parsed = JSON.parse(sanitizedJson.trim());
     parsed.userPrompt = message;
+
     return parsed;
   } catch (err) {
     // Else log the error, archieve the chat and throw an error
-    console.log('Error:', err);
-    console.log('Response:', json);
+    logger.error(`Failed to parse Gemini response: ${json}`);
 
     // Store the chat marked as error for debugging
     await dataController.updateChatHistory(chat, {
@@ -91,7 +92,7 @@ const persistChatHistory = async (chat, metadata) => {
   try {
     await dataController.updateChatHistory(chat, metadata);
   } catch (err) {
-    console.log('An error occured saving to the database:\n', err);
+    logger.error(`An error occured saving to the database:\n ${err}`);
   }
 };
 
